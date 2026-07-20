@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI News まとめ — 独自要約マガジン</title>
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --surface: #ffffff;
+    --surface-2: #eef1f5;
+    --text: #16191f;
+    --text-dim: #545c69;
+    --text-faint: #8791a0;
+    --border: #e5e9ef;
+    --accent: #4f6bed;
+    --shadow: 0 1px 3px rgba(20,30,50,.05), 0 8px 24px rgba(20,30,50,.06);
+    --shadow-lg: 0 4px 12px rgba(20,30,50,.10), 0 24px 60px rgba(20,30,50,.14);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1015; --surface: #161a21; --surface-2: #1d222b;
+      --text: #e9ecf1; --text-dim: #9aa4b2; --text-faint: #6a7482;
+      --border: #252b35; --accent: #7f95f6;
+      --shadow: 0 1px 3px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.3);
+      --shadow-lg: 0 4px 12px rgba(0,0,0,.4), 0 24px 60px rgba(0,0,0,.55);
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+  /* Header */
+  header { border-bottom: 1px solid var(--border); background: var(--surface); }
+  .head-in { display: flex; align-items: center; gap: 14px; padding: 16px 20px; max-width: 1080px; margin: 0 auto; flex-wrap: wrap; }
+  .logo { width: 40px; height: 40px; border-radius: 11px; background: linear-gradient(135deg, var(--accent), #a855f7); display: grid; place-items: center; font-size: 21px; box-shadow: 0 5px 14px color-mix(in srgb, var(--accent) 35%, transparent); }
+  .title h1 { font-size: 20px; font-weight: 800; letter-spacing: -.02em; }
+  .title p { font-size: 12px; color: var(--text-faint); margin-top: -1px; }
+  .updated { margin-left: auto; font-size: 12px; color: var(--text-faint); text-align: right; line-height: 1.5; }
+  .updated b { color: var(--text-dim); font-weight: 700; }
+
+  /* Category nav */
+  .catbar { position: sticky; top: 0; z-index: 15; background: color-mix(in srgb, var(--bg) 85%, transparent); backdrop-filter: saturate(160%) blur(12px); -webkit-backdrop-filter: saturate(160%) blur(12px); border-bottom: 1px solid var(--border); }
+  .cats { display: flex; gap: 8px; padding: 12px 20px; max-width: 1080px; margin: 0 auto; overflow-x: auto; }
+  .cats::-webkit-scrollbar { height: 0; }
+  .cat { border: 1px solid var(--border); background: var(--surface); color: var(--text-dim); border-radius: 999px; padding: 6px 15px; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap; transition: .15s; }
+  .cat:hover { border-color: var(--accent); }
+  .cat.on { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+  /* Lede (top story) */
+  .lede { margin: 26px 0 8px; padding-bottom: 22px; border-bottom: 1px solid var(--border); cursor: pointer; }
+  .lede .kicker { display: block; font-family: ui-monospace, "Cascadia Code", "SFMono-Regular", Consolas, monospace; font-size: 11px; letter-spacing: .14em; color: var(--accent); margin-bottom: 10px; }
+  .lede h2 { font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", Georgia, serif; font-size: clamp(20px, 4vw, 27px); line-height: 1.5; font-weight: 700; margin: 8px 0 10px; }
+  .lede .lead { color: var(--text-dim); font-size: 14.5px; margin-bottom: 8px; }
+  .lede .src { font-size: 12.5px; }
+
+  /* Category sections (newspaper style) */
+  section.category { margin: 30px 0; }
+  section.category.hidden { display: none; }
+  .cat-head { display: flex; align-items: baseline; gap: .6rem; margin-bottom: .9rem; }
+  .cat-head .num { font-family: ui-monospace, "Cascadia Code", "SFMono-Regular", Consolas, monospace; font-size: 12px; color: var(--accent); }
+  .cat-head h3 { font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", Georgia, serif; font-size: 16px; font-weight: 700; margin: 0; }
+  .cat-rule { border: none; border-top: 1px solid var(--border); margin: 0 0 6px; }
+
+  .story { display: grid; grid-template-columns: 76px 1fr; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: .15s; }
+  .story:last-child { border-bottom: none; }
+  .story:hover h4 { color: var(--accent); }
+  .story .date { font-family: ui-monospace, "Cascadia Code", "SFMono-Regular", Consolas, monospace; font-size: 11px; color: var(--text-faint); padding-top: 2px; }
+  .story h4 { margin: 0 0 5px; font-size: 15.5px; font-weight: 700; line-height: 1.5; transition: color .15s; }
+  .story p { margin: 0 0 5px; color: var(--text-dim); font-size: 13.5px; }
+  .story .src { font-size: 12px; }
+  .story .src a, .lede .src a { color: var(--text-faint); }
+  .story .src a:hover, .lede .src a:hover { color: var(--accent); }
+
+  @media (max-width: 520px) {
+    .story { grid-template-columns: 1fr; gap: 3px; }
+    .story .date { padding-top: 0; }
+  }
+
+  .tag { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: .02em; padding: 3px 9px; border-radius: 6px; align-self: flex-start; }
+
+  /* Modal reader */
+  .overlay { position: fixed; inset: 0; z-index: 60; background: rgba(10,14,22,.55); backdrop-filter: blur(3px); display: none; opacity: 0; transition: opacity .2s; padding: 24px; overflow-y: auto; }
+  .overlay.show { display: block; opacity: 1; }
+  .reader { max-width: 720px; margin: 24px auto; background: var(--surface); border: 1px solid var(--border); border-radius: 18px; box-shadow: var(--shadow-lg); overflow: hidden; transform: translateY(12px); transition: transform .22s; }
+  .overlay.show .reader { transform: translateY(0); }
+  .reader .cover { height: 160px; display: grid; place-items: center; font-size: 62px; position: relative; }
+  .reader .close { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; border-radius: 50%; border: none; background: rgba(0,0,0,.35); color: #fff; font-size: 20px; cursor: pointer; display: grid; place-items: center; backdrop-filter: blur(4px); }
+  .reader .close:hover { background: rgba(0,0,0,.55); }
+  .r-body { padding: 26px 34px 34px; }
+  .r-body .tag { margin-bottom: 14px; }
+  .r-body h1 { font-size: 27px; line-height: 1.4; font-weight: 800; letter-spacing: -.02em; }
+  .r-meta { display: flex; gap: 12px; align-items: center; color: var(--text-faint); font-size: 12.5px; margin: 12px 0 22px; padding-bottom: 20px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  .r-body p.para { font-size: 15.5px; color: var(--text); margin-bottom: 17px; line-height: 1.95; }
+  .points { background: var(--surface-2); border-radius: 13px; padding: 18px 20px 18px; margin: 22px 0; }
+  .points h4 { font-size: 13px; font-weight: 800; color: var(--text-dim); margin-bottom: 10px; letter-spacing: .03em; }
+  .points ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .points li { font-size: 14px; padding-left: 24px; position: relative; color: var(--text); }
+  .points li::before { content: "✓"; position: absolute; left: 0; top: 0; color: var(--accent); font-weight: 800; }
+  .sources { margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--border); }
+  .sources h4 { font-size: 12px; font-weight: 800; color: var(--text-faint); margin-bottom: 8px; letter-spacing: .03em; }
+  .sources a { display: inline-flex; align-items: center; gap: 5px; font-size: 12.5px; color: var(--accent); margin-right: 14px; }
+  .sources a:hover { text-decoration: underline; }
+  .disclaim { font-size: 11.5px; color: var(--text-faint); margin-top: 16px; line-height: 1.7; }
+
+  footer { text-align: center; color: var(--text-faint); font-size: 12px; line-height: 1.9; padding: 30px 20px 50px; margin-top: 20px; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<header>
+  <div class="head-in">
+    <div class="logo">🗞️</div>
+    <div class="title">
+      <h1>AI News まとめ</h1>
+      <p>収集した最新ニュースを日本語で独自要約するマガジン</p>
+    </div>
+    <div class="updated">最終更新<br><b id="upd">2026年7月20日</b></div>
+  </div>
+</header>
+
+<div class="catbar">
+  <div class="cats" id="cats"></div>
+</div>
+
+<div class="wrap">
+  <div id="ledeSlot"></div>
+  <div id="sections"></div>
+</div>
+
+<footer>
+  <div>この記事は、公開ニュースを収集し <b>Claude が日本語で独自に要約・再構成</b>したものです（AIによる自動生成のため誤りを含む可能性があります）。</div>
+  <div>各記事末尾の「参考ソース」から一次情報を確認できます。掲載時点: 2026年7月20日のスナップショット。</div>
+</footer>
+
+<div class="overlay" id="overlay">
+  <article class="reader" id="reader"></article>
+</div>
+
+<script>
+"use strict";
+
+// カテゴリ定義（色・アイコン）
+const CAT = {
+  model:    { label: "モデル",       color: "#6366f1", icon: "🧠" },
+  product:  { label: "プロダクト",   color: "#0ea5a3", icon: "🚀" },
+  business: { label: "ビジネス",     color: "#d97706", icon: "💼" },
+  policy:   { label: "規制・政策",   color: "#e11d48", icon: "⚖️" },
+  research: { label: "研究",         color: "#16a34a", icon: "🔬" },
+  security: { label: "セキュリティ", color: "#64748b", icon: "🔒" },
+};
+
+// ---- 記事データ（Claudeが最新ニュースから独自に要約） ----
+const ARTICLES = [
+  {
+    id: "overview", cat: "model", featured: true, date: "2026-07-20", read: 3,
+    title: "【今週の総まとめ】新世代モデルが出そろい、資金は“物理AI”へ。規制も本格始動",
+    lead: "GPT-5.6・Sonnet 5・Kimi K3が相次ぎ登場する一方、Geminiは足踏み。ロボティクスへの巨額投資とEUの透明性規則も動き出した。",
+    body: [
+      "2026年7月は、主要各社の新世代モデルが一気に出そろった月となった。OpenAIは用途別3モデルの「GPT-5.6」、Anthropicは復帰した「Fable 5」に加え高コスパの「Sonnet 5」を投入。中国Moonshot AIのオープンウェイト「Kimi K3」がベンチマーク上位に食い込む一方、Googleの旗艦「Gemini 3.5 Pro」は品質未達で公開を延期し、競争の激しさと難しさが同時に浮き彫りになった。",
+      "資金の向かう先は、モデルそのものから「それを現実世界で動かす基盤」へと移りつつある。ロボティクスのNeura Roboticsが最大14億ドル、推論インフラのFireworks AIが15億ドルを調達するなど、“物理AI”とインフラへの大型投資が相次いだ。",
+      "制度面ではEUのAIアクトが透明性規則の発効を8月に控え、7月20日にガイドラインを公表。各社の自主規制提唱や各国の政策も動き、AIは「作る」フェーズから「社会に組み込む」フェーズへと軸足を移している。"
+    ],
+    points: [
+      "新世代モデルが集中投入：GPT-5.6 / Sonnet 5 / Kimi K3",
+      "Gemini 3.5 Proは品質未達で公開延期",
+      "資金はロボ・推論インフラなど“物理AI”へ集中",
+      "EU AIアクトの透明性規則が8月発効、規制が本格化"
+    ],
+    sources: [{ n: "ThursdAI (July 2026 Releases)", u: "https://thursdai.news/releases/2026-07" }, { n: "Tech Startups", u: "https://techstartups.com/2026/07/17/top-tech-news-today-july-17-2026-anthropic-apple-google-meta-moonshot-ai-nvidia-more/" }]
+  },
+  {
+    id: "gpt56", cat: "model", date: "2026-07-16", read: 2,
+    title: "OpenAI、新世代「GPT-5.6」を3モデル構成で公開 — Sol・Terra・Luna",
+    lead: "単一モデルではなく、用途別に最適化された3つのモデルを同時展開。コストと性能を選べる“分業化”が鮮明に。",
+    body: [
+      "OpenAIは大規模言語モデルの新ラインアップ「GPT-5.6」を発表した。単一モデルではなく、用途別に最適化された3モデル「Sol」「Terra」「Luna」で構成されるのが最大の特徴だ。",
+      "最上位のSolは高度な推論・コーディング・科学分野を狙い、価格は入力100万トークンあたり$5.00、出力$30.00。中位のTerraは前世代GPT-5.5級の品質を約半分のコストで提供する位置づけで、Lunaは高速・低コストの大量処理向けに設計されている。",
+      "用途に応じてコストと性能を選ぶ“モデルの分業化”は、ClaudeやGeminiを含む各社に共通する潮流だ。企業は本番運用でタスクごとに最適なモデルを割り当て、コストを抑えやすくなる。"
+    ],
+    points: [
+      "Sol / Terra / Luna の3モデル構成",
+      "Sol は高度推論向け（入力$5・出力$30 / 100万トークン）",
+      "Terra は約半額でGPT-5.5級の品質",
+      "Luna は高速・低コストの大量処理向け"
+    ],
+    sources: [{ n: "LLM-Stats", u: "https://llm-stats.com/llm-updates" }, { n: "ThursdAI", u: "https://thursdai.news/releases/2026-07" }]
+  },
+  {
+    id: "claude5", cat: "model", date: "2026-07-15", read: 2,
+    title: "Anthropic「Claude Fable 5」が復帰、高コスパの「Sonnet 5」も登場",
+    lead: "輸出規制で19日間停止していた最上位級モデルが再提供。同時にOpus 4.8に迫るSonnet 5を導入価格で投入。",
+    body: [
+      "Anthropicの最上位級モデル「Claude Fable 5」が7月1日、輸出規制に伴う19日間の停止を経てグローバルで再提供された。複雑な推論や戦略立案の用途でOpusラインの上位に位置づけられる。",
+      "併せて投入された「Claude Sonnet 5」は、Opus 4.8に迫る性能を、8月31日までの導入価格として入力$2／出力$10（100万トークンあたり）で提供する。コスト効率の高い実用モデルとして注目される。",
+      "Sonnet 5はエージェント型のコーディングや業務ワークフローを日常業務へと押し広げる存在と位置づけられており、性能と価格のバランスで“普段使い”の中心を狙う。"
+    ],
+    points: [
+      "Fable 5 が7月1日に復帰（19日間の停止後）",
+      "Sonnet 5 はOpus 4.8に迫る性能",
+      "Sonnet 5 導入価格 入力$2 / 出力$10（〜8/31）",
+      "エージェント型コーディングを日常業務へ"
+    ],
+    sources: [{ n: "LLM-Stats (AI News)", u: "https://llm-stats.com/ai-news" }, { n: "AI-Weekly", u: "https://ai-weekly.ai/newsletter-07-07-2026/" }]
+  },
+  {
+    id: "gemini", cat: "model", date: "2026-07-17", read: 2,
+    title: "Google「Gemini 3.5 Pro」広範公開を数カ月延期 — コーディング・長期推論で基準未達",
+    lead: "社内テストで自社の期待水準に届かず限定プレビューに留まる。発表を受けAlphabet株は4%超下落した。",
+    body: [
+      "Alphabet傘下のGoogleは、旗艦大規模言語モデル「Gemini 3.5 Pro」の広範な提供を数カ月延期したと報じられた。社内テストで、コーディング性能と複雑な長期推論タスクが自社の期待水準に届かなかったという。",
+      "当初は6月の公開が見込まれていたが、モデルは限定的な企業向けプレビューにとどまっている。加えて4名の研究者が離脱したとの報道もあり、開発体制への注目も集まった。",
+      "発表を受けてAlphabet株は4%超下落。最前線のモデルで品質を担保することの難しさと、期待値が高止まりする市場のシビアさを同時に示す出来事となった。"
+    ],
+    points: [
+      "広範公開を数カ月延期",
+      "コーディング・長期推論で社内基準に未達",
+      "限定的な企業向けプレビューに留まる",
+      "発表後、Alphabet株は4%超下落"
+    ],
+    sources: [{ n: "Tech Insider", u: "https://tech-insider.org/au/gemini-3-5-pro-july-17-launch-2026/" }, { n: "Tech Startups", u: "https://techstartups.com/2026/07/17/top-tech-news-today-july-17-2026-anthropic-apple-google-meta-moonshot-ai-nvidia-more/" }]
+  },
+  {
+    id: "kimi", cat: "model", date: "2026-07-16", read: 2,
+    title: "中国Moonshot AI、オープンウェイト「Kimi K3」公開 — フロント生成でトップ級",
+    lead: "計画→実装→テスト→修正を跨ぐ長期ワークフロー向け。Frontend Code Arenaで勝率76%の首位を主張。",
+    body: [
+      "北京拠点のMoonshot AIが、長期的なワークフロー向けに設計したオープンウェイトモデル「Kimi K3」を公開した。計画を立て、コードを書き、テストし、修正するという複数ステップを跨ぐ作業を想定している。",
+      "Arena.aiの「Frontend Code Arena」で勝率76%を記録して首位に立ち、Claude Fable 5やGPT-5.6 Solを上回ったとされる。ターミナル操作を評価する「Terminal Bench 2.1」でも88.3を記録した。",
+      "重みが公開されるオープンモデルが最前線に食い込む流れは続いており、クローズドな最上位モデルとの差を着実に縮めつつある。企業にとっては自社環境で動かせる選択肢が増える意味を持つ。"
+    ],
+    points: [
+      "オープンウェイト、長期ワークフロー向け設計",
+      "Frontend Code Arena で勝率76%・首位を主張",
+      "Fable 5・GPT-5.6 Sol を上回るとの結果",
+      "Terminal Bench 2.1 で 88.3"
+    ],
+    sources: [{ n: "Tech Startups", u: "https://techstartups.com/2026/07/17/top-tech-news-today-july-17-2026-anthropic-apple-google-meta-moonshot-ai-nvidia-more/" }, { n: "LLM-Stats", u: "https://llm-stats.com/ai-news" }]
+  },
+  {
+    id: "gptlive", cat: "product", date: "2026-07-14", read: 2,
+    title: "OpenAI「GPT-Live」公開 — 聞きながら話せる全二重の音声モデル",
+    lead: "ターン制の制約を解消し、割り込みや相槌を交えた自然なリアルタイム会話を目指す。",
+    body: [
+      "OpenAIはリアルタイム音声モデル「GPT-Live」を公開した。従来の「話す→待つ→返す」というターン制ではなく、聞くと話すを同時に行える全二重（フルデュプレックス）方式が特徴だ。",
+      "ChatGPT上で、相手の発話に割り込んだり相槌を打ったりしながら、間を空けずに考えつつ会話できる。人間同士の自然な対話に一歩近づく体験を狙う。",
+      "音声インターフェースはAIアシスタントの主戦場になりつつあり、応答の即時性と自然さが新たな競争軸となっている。テキスト中心だった対話が、声を軸にした体験へと広がりを見せている。"
+    ],
+    points: [
+      "全二重（同時に聞いて話す）音声モデル",
+      "ターン制の待ち時間を解消",
+      "割り込み・相槌を交えた自然な会話",
+      "音声がアシスタント競争の新たな主戦場に"
+    ],
+    sources: [{ n: "Tech Startups", u: "https://techstartups.com/2026/07/17/top-tech-news-today-july-17-2026-anthropic-apple-google-meta-moonshot-ai-nvidia-more/" }, { n: "MarketingProfs (AI Update)", u: "https://www.marketingprofs.com/opinions/2026/55273/ai-update-july-17-2026-ai-news-and-views-from-the-past-week" }]
+  },
+  {
+    id: "aimode", cat: "product", date: "2026-07-16", read: 2,
+    title: "Google「AI Mode」検索を拡張 — Instacart・Canva・YouTube Musicを統合",
+    lead: "検索画面を離れずに他アプリのタスクを実行。“調べる検索”から“実行する検索”への転換が進む。",
+    body: [
+      "GoogleはAIによる検索体験「AI Mode」を拡張し、Instacart、Canva、YouTube Musicとの連携を追加した。検索インターフェースを離れることなく、これらのアプリ上のタスクを実行できる。",
+      "たとえば買い物リストの作成、デザイン、音楽の再生などを、検索からシームレスに指示できる。検索を「情報を調べる場所」から「タスクを実行する場所」へと押し広げる動きだ。",
+      "Googleは動画・画像の新ツールも並行して投入しており、検索を軸にしたエージェント的な操作の統合を加速させている。ユーザーの導線が検索に集約されていく可能性がある。"
+    ],
+    points: [
+      "Instacart / Canva / YouTube Music を統合",
+      "検索画面のまま他アプリのタスクを実行",
+      "「調べる」から「実行する」検索へ",
+      "動画・画像の新ツールも並行投入"
+    ],
+    sources: [{ n: "Tech Startups", u: "https://techstartups.com/2026/07/17/top-tech-news-today-july-17-2026-anthropic-apple-google-meta-moonshot-ai-nvidia-more/" }, { n: "MarketingProfs", u: "https://www.marketingprofs.com/opinions/2026/55273/ai-update-july-17-2026-ai-news-and-views-from-the-past-week" }]
+  },
+  {
+    id: "apple", cat: "business", date: "2026-07-17", read: 2,
+    title: "Appleが時価総額で世界首位に返り咲き — Nvidiaを抜き約5兆ドルに接近",
+    lead: "AI戦略とハード基盤への信頼回復が背景。半導体からプラットフォーマーへ、市場の物差しが揺れる。",
+    body: [
+      "Appleが時価総額でNvidiaを上回り、世界で最も価値のある企業の座を取り戻した。評価額は約5兆ドルに迫る。ハードウェアのエコシステムとAI戦略への投資家の信頼回復が背景にあるとされる。",
+      "生成AIブームの主役だった半導体メーカーから、それを製品に載せるプラットフォーマーへ——市場が価値を測る物差しが揺れ動いていることを示す出来事だ。",
+      "一方でAppleは、OpenAIへ移籍した元従業員 約40名に対し、ハードの知的財産を巡って文書保全を求める法的警告を送ったと報じられた。人材と技術の流出に神経質になっている様子もうかがえる。"
+    ],
+    points: [
+      "Nvidiaを抜き時価総額で世界1位に",
+      "評価額は約5兆ドルに接近",
+      "AI戦略とハード基盤への信頼回復が背景",
+      "OpenAI移籍の元従業員 約40名へ知財警告も"
+    ],
+    sources: [{ n: "Tech Startups", u: "https://techstartups.com/2026/07/17/top-tech-news-today-july-17-2026-anthropic-apple-google-meta-moonshot-ai-nvidia-more/" }]
+  },
+  {
+    id: "robofund", cat: "business", date: "2026-07-15", read: 3,
+    title: "資金は“物理AI”へ — ロボティクスと推論インフラに巨額調達が続く",
+    lead: "Neura Robotics 最大14億ドル、Fireworks AI 15億ドル。モデルを現実で動かす基盤へマネーが集中。",
+    body: [
+      "「物理AI」やAIインフラへの大型投資が相次いでいる。ドイツのNeura RoboticsはシリーズCで最大14億ドルを調達し、フルスタックのロボット企業として過去最大級の投資と主張する。",
+      "推論インフラのFireworks AIはシリーズDで15億ドルを調達し、評価額は175億ドルに達した。英HumanoidはシリーズAで1.5億ドル（評価額12億ドル）、Walden Roboticsは3億ドル、独Microagiは独スタートアップ最大のシード5,500万ドルを集めた。",
+      "モデルそのものだけでなく、それを現実世界で動かすロボットと、大規模運用を支える推論基盤に資金が向かっているのが2026年の特徴だ。AIの価値が“実装と運用”のレイヤーへ移りつつあることを映している。"
+    ],
+    points: [
+      "Neura Robotics 最大$1.4B（フルスタックで過去最大級）",
+      "Fireworks AI $1.5B、評価額$17.5B",
+      "Humanoid $150M / Walden $300M / Microagi $55M",
+      "資金は“モデルを動かす”インフラへ集中"
+    ],
+    sources: [{ n: "Tech Startups", u: "https://techstartups.com/2026/07/17/top-tech-news-today-july-17-2026-anthropic-apple-google-meta-moonshot-ai-nvidia-more/" }, { n: "AIapps", u: "https://www.aiapps.com/blog/top-ai-news-july-breakthroughs-launches-trends/" }]
+  },
+  {
+    id: "euact", cat: "policy", date: "2026-07-20", read: 3,
+    title: "EU AIアクト、透明性規則が8月発効へ — 7月20日にガイドライン公表",
+    lead: "中小企業向けの緩和は拡大、高リスク規則の適用は延期。制度が“運用フェーズ”に入る。",
+    body: [
+      "欧州委員会は7月20日、特定のAIシステムの提供者・利用者に対する透明性義務のガイドラインを公表した。AIアクトの透明性規則は2026年8月に発効する。AIが生成したコンテンツの明示などが求められる見通しだ。",
+      "中小企業（SME）向けの簡素化枠組みは、従業員750人・年商1.5億ユーロ以下の企業まで対象が拡大された。ガイダンスの簡素化、制裁金の軽減、規制サンドボックスの利用、標準文書テンプレートなどの恩恵がある。各加盟国は2026年8月2日までに国内サンドボックスを最低1つ設置する義務を負う。",
+      "一方、高リスクAIの適用期日は緩和され、単体の高リスクシステムは2027年12月2日、製品に組み込まれる高リスクシステムは2028年8月2日へと調整された。義務化を段階的に進める現実路線がとられている。"
+    ],
+    points: [
+      "7/20 透明性ガイドライン公表、透明性規則は8月発効",
+      "SME緩和を従業員750人・年商1.5億ユーロ以下へ拡大",
+      "各国は国内サンドボックスを8/2までに設置",
+      "高リスク規則は2027〜2028年へ適用延期"
+    ],
+    sources: [{ n: "European Commission", u: "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" }, { n: "Council of the EU", u: "https://www.consilium.europa.eu/en/press/press-releases/2026/06/29/artificial-intelligence-council-gives-final-green-light-to-simplify-and-streamline-rules/" }]
+  },
+  {
+    id: "govtrend", cat: "policy", date: "2026-07-17", read: 3,
+    title: "規制とガバナンスの潮流 — 自主規制の提唱、アプリ排除、地政学が交錯",
+    lead: "Anthropicは州レベルの強い規制を提唱、SFは“nudify”アプリ13本を排除、中国はオープンソースAIを国際推進。",
+    body: [
+      "AnthropicはフロンティアAIに対し、独立した安全監査や、政府がシステムを検査する権限を含む州レベルの強い規制を提唱している。義務は最大手の開発者に絞るべきだという立場だ。",
+      "サンフランシスコ市はApp StoreとGoogle Playに対し、同意なき性的画像を生成するいわゆる“nudify”系アプリ13本の削除を命じた。個々の開発者ではなく配信プラットフォームを標的にした点が特徴だ。",
+      "中国では習近平国家主席が世界AI大会でオープンソースAIを推進し、途上国への支援を表明。AIアクセスの不均衡を「不正義」と位置づけた。加えて、サム・アルトマン邸への放火未遂やAnthropicへの脅迫警告など、AI企業幹部への脅威も報じられ、業界は身辺警護を強化している。"
+    ],
+    points: [
+      "Anthropicが州レベルの強い規制（独立監査・検査権限）を提唱",
+      "SFが“nudify”アプリ13本の削除を命令（配信層を標的）",
+      "中国・習近平がオープンソースAIを国際的に推進",
+      "AI企業幹部への脅迫が増加、警護を強化"
+    ],
+    sources: [{ n: "Tech Startups", u: "https://techstartups.com/2026/07/17/top-tech-news-today-july-17-2026-anthropic-apple-google-meta-moonshot-ai-nvidia-more/" }, { n: "AI Regulation News (July 2026)", u: "https://blog.mean.ceo/ai-regulation-news-july-2026/" }]
+  },
+  {
+    id: "physical", cat: "research", date: "2026-07-15", read: 2,
+    title: "物理AIとエージェント研究が加速 — オープンモデルがロボと研究を牽引",
+    lead: "NVIDIAのオープンモデルがICML2026で多数採用。自然言語で動くロボや自己進化する業務エージェントも。",
+    body: [
+      "ロボティクスと研究の最前線で、オープンモデルの存在感が増している。ICML2026では約2,000本の採択論文がNVIDIA GPUに、145本がオープンモデル群「Nemotron」に言及した。Cosmos、Isaac GR00T、BioNeMoなども、物理AI・自動運転・生物医学の研究基盤になっている。",
+      "新しいIsaac GR00Tのオープンモデルは、自然言語の指示を理解し、視覚・言語・行動（VLA）推論によって複数ステップの複雑な作業をこなすロボットを可能にする。ロボットが“言われた通りに段取りする”方向へ進んでいる。",
+      "企業向けでは、NVIDIAとServiceNowが自律AIエージェント「Project Arc」を発表。知識労働者のための長時間稼働・自己進化型のデスクトップエージェントで、業務の自律的な実行を狙う。"
+    ],
+    points: [
+      "ICML2026でNemotron等オープンモデルの採用が拡大",
+      "Isaac GR00Tが言語理解＋VLA推論で多段タスク",
+      "Project Arc＝自己進化する業務デスクトップエージェント",
+      "オープンモデルが物理AI研究を牽引"
+    ],
+    sources: [{ n: "NVIDIA Blog (Open Models / ICML)", u: "https://blogs.nvidia.com/blog/open-models-icml-2026/" }, { n: "AI-Weekly", u: "https://ai-weekly.ai/newsletter-07-07-2026/" }]
+  },
+  {
+    id: "suno", cat: "security", date: "2026-07-16", read: 2,
+    title: "AI音楽Sunoで情報漏洩 — 学習データのスクレイピング元が露呈、著作権リスク再燃",
+    lead: "ソースコードや学習データの詳細が流出。YouTube Music等からの収集が含まれ、訴訟リスクが浮上。",
+    body: [
+      "AI音楽スタートアップのSunoで情報漏洩が発生し、ソースコードや学習データの詳細が流出した。YouTube Music、Deezer、Geniusなどからのスクレイピングが含まれていたとされ、著作権を巡る訴訟リスクが改めて浮き彫りになった。",
+      "侵害は前年11月に遡り、顧客の決済情報が影響を受けた可能性もあるという。学習データの出所という、生成AIの根幹に関わる情報が露呈した点が重い。",
+      "AIの普及に伴い、モデルの学習データ、企業幹部の安全、さらには製造インフラまで、攻撃対象は広がっている。性能競争と並行して、守りの体制づくりが企業に強く問われている。"
+    ],
+    points: [
+      "Sunoで漏洩、学習データのスクレイピング元が露呈",
+      "YouTube Music / Deezer / Genius 等が対象",
+      "決済情報流出の可能性、著作権訴訟リスク",
+      "学習データの出所という核心が外部に露出"
+    ],
+    sources: [{ n: "Tech Startups", u: "https://techstartups.com/2026/07/17/top-tech-news-today-july-17-2026-anthropic-apple-google-meta-moonshot-ai-nvidia-more/" }]
+  }
+];
+
+// ---- 描画 ----
+let activeCat = "all";
+const $ = (id) => document.getElementById(id);
+
+function esc(s){ return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function fmtDate(d){ const [y,m,day]=d.split("-"); return `${+m}月${+day}日`; }
+
+function coverStyle(cat){
+  const c = CAT[cat].color;
+  return `background: linear-gradient(135deg, ${c}, color-mix(in srgb, ${c} 55%, #000));`;
+}
+function tagHtml(cat){
+  const c = CAT[cat];
+  return `<span class="tag" style="background:color-mix(in srgb, ${c.color} 16%, transparent); color:${c.color}">${c.icon} ${c.label}</span>`;
+}
+
+function buildCats(){
+  const cats = ["all", ...Object.keys(CAT)];
+  $("cats").innerHTML = cats.map(k=>{
+    const label = k==="all" ? "🗂 すべて" : `${CAT[k].icon} ${CAT[k].label}`;
+    return `<button class="cat ${k==="all"?"on":""}" data-k="${k}">${label}</button>`;
+  }).join("");
+  $("cats").addEventListener("click", e=>{
+    const b = e.target.closest(".cat"); if(!b) return;
+    activeCat = b.dataset.k;
+    document.querySelectorAll(".cat").forEach(x=>x.classList.toggle("on", x===b));
+    renderList();
+  });
+}
+
+function renderLede(){
+  const hero = ARTICLES.find(a=>a.featured);
+  if(!hero){ $("ledeSlot").innerHTML = ""; return; }
+  const show = activeCat === "all" || activeCat === hero.cat;
+  $("ledeSlot").innerHTML = show ? `
+    <div class="lede" data-id="${hero.id}">
+      <span class="kicker">TOP STORY</span>
+      ${tagHtml(hero.cat)}
+      <h2>${esc(hero.title)}</h2>
+      <div class="lead">${esc(hero.lead)}</div>
+      <div class="src">${fmtDate(hero.date)} ・ ${hero.sources.map(s=>`<a href="${esc(s.u)}" target="_blank" rel="noopener">🔗 ${esc(s.n)}</a>`).join(" ")}</div>
+    </div>` : "";
+}
+
+function renderSections(){
+  const activeCats = Object.keys(CAT).filter(k => ARTICLES.some(a => !a.featured && a.cat === k));
+  $("sections").innerHTML = activeCats.map((catKey, i) => {
+    const items = ARTICLES.filter(a => !a.featured && a.cat === catKey);
+    const hidden = !(activeCat === "all" || activeCat === catKey);
+    const num = String(i + 1).padStart(2, "0");
+    const storiesHtml = items.map(a => `
+      <div class="story" data-id="${a.id}">
+        <div class="date">${fmtDate(a.date)}</div>
+        <div>
+          <h4>${esc(a.title)}</h4>
+          <p>${esc(a.lead)}</p>
+          <div class="src">${a.sources.map(s=>`<a href="${esc(s.u)}" target="_blank" rel="noopener">🔗 ${esc(s.n)}</a>`).join(" ")}</div>
+        </div>
+      </div>`).join("");
+    return `
+      <section class="category${hidden ? " hidden" : ""}" data-cat="${catKey}">
+        <div class="cat-head">
+          <span class="num">${num}</span>
+          <h3>${CAT[catKey].icon} ${CAT[catKey].label}</h3>
+        </div>
+        <hr class="cat-rule" />
+        ${storiesHtml}
+      </section>`;
+  }).join("");
+}
+
+function renderList(){
+  renderLede();
+  renderSections();
+}
+
+// ---- 記事リーダー（サイト内で全文表示） ----
+function openArticle(id){
+  const a = ARTICLES.find(x=>x.id===id); if(!a) return;
+  $("reader").innerHTML = `
+    <div class="cover" style="${coverStyle(a.cat)}">
+      ${CAT[a.cat].icon}
+      <button class="close" id="closeBtn" aria-label="閉じる">×</button>
+    </div>
+    <div class="r-body">
+      ${tagHtml(a.cat)}
+      <h1>${esc(a.title)}</h1>
+      <div class="r-meta"><span>🗓 ${fmtDate(a.date)}</span><span>・ 約${a.read}分</span><span>・ AI要約記事</span></div>
+      ${a.body.map(p=>`<p class="para">${esc(p)}</p>`).join("")}
+      <div class="points">
+        <h4>📌 ポイント</h4>
+        <ul>${a.points.map(p=>`<li>${esc(p)}</li>`).join("")}</ul>
+      </div>
+      <div class="sources">
+        <h4>参考ソース（一次情報）</h4>
+        ${a.sources.map(s=>`<a href="${esc(s.u)}" target="_blank" rel="noopener">🔗 ${esc(s.n)}</a>`).join("")}
+        <div class="disclaim">※ 本記事は上記の公開情報をもとに Claude が日本語で独自に要約・再構成したものです。正確性を期していますが、詳細は一次情報をご確認ください。</div>
+      </div>
+    </div>`;
+  $("overlay").classList.add("show");
+  document.body.style.overflow = "hidden";
+  $("closeBtn").addEventListener("click", closeArticle);
+}
+function closeArticle(){
+  $("overlay").classList.remove("show");
+  document.body.style.overflow = "";
+}
+
+// クリックで記事を開く
+document.addEventListener("click", e=>{
+  const el = e.target.closest("[data-id]");
+  if(el){ openArticle(el.dataset.id); }
+});
+$("overlay").addEventListener("click", e=>{ if(e.target===$("overlay")) closeArticle(); });
+document.addEventListener("keydown", e=>{ if(e.key==="Escape") closeArticle(); });
+
+// ---- 起動 ----
+buildCats();
+renderList();
+</script>
+</body>
+</html>
