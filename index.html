@@ -118,7 +118,7 @@
       <h1>AI News まとめ</h1>
       <p>収集した最新ニュースを日本語で独自要約するマガジン</p>
     </div>
-    <div class="updated">最終更新<br><b id="upd">2026年7月20日</b></div>
+    <div class="updated">最終更新<br><b id="upd">2026年8月16日</b></div>
   </div>
 </header>
 
@@ -133,7 +133,7 @@
 
 <footer>
   <div>この記事は、公開ニュースを収集し <b>Claude が日本語で独自に要約・再構成</b>したものです（AIによる自動生成のため誤りを含む可能性があります）。</div>
-  <div>各記事末尾の「参考ソース」から一次情報を確認できます。掲載時点: 2026年7月20日のスナップショット。</div>
+  <div>各記事末尾の「参考ソース」から一次情報を確認できます。掲載時点: 2026年8月16日のスナップショット。</div>
 </footer>
 
 <div class="overlay" id="overlay">
@@ -156,225 +156,242 @@ const CAT = {
 // ---- 記事データ（Claudeが最新ニュースから独自に要約） ----
 const ARTICLES = [
   {
-    id: "overview", cat: "model", featured: true, date: "2026-07-20", read: 3,
-    title: "【今週の総まとめ】新世代モデルが出そろい、資金は“物理AI”へ。規制も本格始動",
-    lead: "GPT-5.6・Sonnet 5・Kimi K3が相次ぎ登場する一方、Geminiは足踏み。ロボティクスへの巨額投資とEUの透明性規則も動き出した。",
+    id: "overview", cat: "model", featured: true, date: "2026-08-15", read: 3,
+    title: "【今週の総まとめ】Anthropicが初の四半期黒字、Googleは新型Flashと体制刷新で応戦",
+    lead: "Anthropicの売上が四半期で115億ドル超に達し初の黒字化。Googleは低価格・高速な新型Flashを投入する一方、DeepMind体制を刷新した。規制の実装も本格化している。",
     body: [
-      "2026年7月は、主要各社の新世代モデルが一気に出そろった月となった。OpenAIは用途別3モデルの「GPT-5.6」、Anthropicは復帰した「Fable 5」に加え高コスパの「Sonnet 5」を投入。中国Moonshot AIのオープンウェイト「Kimi K3」がベンチマーク上位に食い込む一方、Googleの旗艦「Gemini 3.5 Pro」は品質未達で公開を延期し、競争の激しさと難しさが同時に浮き彫りになった。",
-      "資金の向かう先は、モデルそのものから「それを現実世界で動かす基盤」へと移りつつある。ロボティクスのNeura Roboticsが最大14億ドル、推論インフラのFireworks AIが15億ドルを調達するなど、“物理AI”とインフラへの大型投資が相次いだ。",
-      "制度面ではEUのAIアクトが透明性規則の発効を8月に控え、7月20日にガイドラインを公表。各社の自主規制提唱や各国の政策も動き、AIは「作る」フェーズから「社会に組み込む」フェーズへと軸足を移している。"
+      "2026年8月前半のAI業界を象徴するのは、モデル開発から収益化・体制固めへと重心が移ったことだ。Anthropicは投資家向け資料で、第2四半期の売上が115億ドルを超え、前年同期の7.87億ドルから14倍に伸びたと報じられた。調整後営業利益も黒字に転じたとされ、主要AIラボの中で先陣を切った格好だ。",
+      "Googleは8月13日に高速・低価格な新型「Gemini 3.7 Flash」を投入し、コーディング用途での実用性を強化した。同時期にxAIの「Grok 4.6」も公開され、各社は最上位モデルの性能競争に加え、価格対性能を競う段階に入っている。一方でGoogleは8月上旬、Demis HassabisをGoogle DeepMind会長に据え、Jeff Deanが27年在籍したGoogleを離れて新会社Discovery Loopを立ち上げるなど、AI体制の大幅な刷新にも動いた。",
+      "制度面では、EUのAIアクトが8月2日に透明性規則の適用を開始し、ホワイトハウスも主要AI企業4社を招き自主的な安全性テストの枠組みを協議した。モデルの進化と収益化が加速する一方で、それを統治する仕組みづくりも同時並行で進んでいる。"
     ],
     points: [
-      "新世代モデルが集中投入：GPT-5.6 / Sonnet 5 / Kimi K3",
-      "Gemini 3.5 Proは品質未達で公開延期",
-      "資金はロボ・推論インフラなど“物理AI”へ集中",
-      "EU AIアクトの透明性規則が8月発効、規制が本格化"
+      "Anthropicの四半期売上が115億ドル超、初の黒字化と報じられる",
+      "Google「Gemini 3.7 Flash」・xAI「Grok 4.6」が相次ぎ登場",
+      "GoogleはHassabis会長就任・Jeff Dean退社で体制刷新",
+      "EU AIアクトの透明性規則が8月2日発効、米国も自主的枠組みを協議"
     ],
-    sources: [{ n: "ThursdAI (July 2026 Releases)", u: "https://thursdai.news/releases/2026-07" }, { n: "Tech Startups", u: "https://techstartups.com/2026/07/17/top-tech-news-today-july-17-2026-anthropic-apple-google-meta-moonshot-ai-nvidia-more/" }]
+    sources: [{ n: "Tech Startups (Aug 14)", u: "https://techstartups.com/2026/08/14/top-tech-news-today-august-14-2026-apple-anthropic-deepseek-google-ibm-pony-ai-openai-spacex-uber-more/" }, { n: "TheNextWeb", u: "https://thenextweb.com/news/anthropic-q2-2026-revenue-11-5-billion-operating-income" }]
   },
   {
-    id: "gpt56", cat: "model", date: "2026-07-16", read: 2,
-    title: "OpenAI、新世代「GPT-5.6」を3モデル構成で公開 — Sol・Terra・Luna",
-    lead: "単一モデルではなく、用途別に最適化された3つのモデルを同時展開。コストと性能を選べる“分業化”が鮮明に。",
+    id: "geminiflash", cat: "model", date: "2026-08-13", read: 2,
+    title: "Google「Gemini 3.7 Flash」公開 — コーディング特化・価格半額の新“主力機”",
+    lead: "前モデルからわずか3週間での投入。導入価格は入力$0.75・出力$3.75（100万トークン）と旧価格の半額に設定された。",
     body: [
-      "OpenAIは大規模言語モデルの新ラインアップ「GPT-5.6」を発表した。単一モデルではなく、用途別に最適化された3モデル「Sol」「Terra」「Luna」で構成されるのが最大の特徴だ。",
-      "最上位のSolは高度な推論・コーディング・科学分野を狙い、価格は入力100万トークンあたり$5.00、出力$30.00。中位のTerraは前世代GPT-5.5級の品質を約半分のコストで提供する位置づけで、Lunaは高速・低コストの大量処理向けに設計されている。",
-      "用途に応じてコストと性能を選ぶ“モデルの分業化”は、ClaudeやGeminiを含む各社に共通する潮流だ。企業は本番運用でタスクごとに最適なモデルを割り当て、コストを抑えやすくなる。"
+      "Googleは8月13日、新型モデル「Gemini 3.7 Flash」を公開した。前世代の「Gemini 3.6 Flash」からわずか3週間というハイペースでの投入となる。ゼロから学習し直すのではなく、アルゴリズムの改良とユーザーからのフィードバックを反映して置き換えたモデルだという。",
+      "コーディング分野での実用性を重視しており、デバッグ性能が向上したほか、初回の生成コードがそのまま本番投入できる完成度に近づいたとされる。Web開発やナレッジタスク、エージェント型ワークフロー向けの“ワークホース”という位置づけだ。",
+      "価格は2026年内、入力100万トークンあたり$0.75・出力$3.75の導入価格で提供され、旧価格からほぼ半額になった。Geminiアプリの「Spark」（AI Pro/Ultra向け）のほか、Google Antigravity、AI Studio、Android Studio、Gemini Enterpriseなど幅広い製品に展開されている。"
     ],
     points: [
-      "Sol / Terra / Luna の3モデル構成",
-      "Sol は高度推論向け（入力$5・出力$30 / 100万トークン）",
-      "Terra は約半額でGPT-5.5級の品質",
-      "Luna は高速・低コストの大量処理向け"
+      "前モデルから3週間というハイペースでの投入",
+      "コーディング・エージェント向けワークホースモデル",
+      "価格は旧世代のほぼ半額（入力$0.75・出力$3.75/100万トークン）",
+      "Spark・Antigravity・AI Studio等に順次展開"
     ],
-    sources: [{ n: "LLM-Stats", u: "https://llm-stats.com/llm-updates" }, { n: "ThursdAI", u: "https://thursdai.news/releases/2026-07" }]
+    sources: [{ n: "Google Blog", u: "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-3-7-flash/" }, { n: "9to5Google", u: "https://9to5google.com/2026/08/13/gemini-3-7-flash-launch/" }]
   },
   {
-    id: "claude5", cat: "model", date: "2026-07-15", read: 2,
-    title: "Anthropic「Claude Fable 5」が復帰、高コスパの「Sonnet 5」も登場",
-    lead: "輸出規制で19日間停止していた最上位級モデルが再提供。同時にOpus 4.8に迫るSonnet 5を導入価格で投入。",
+    id: "grok46", cat: "model", date: "2026-08-12", read: 2,
+    title: "xAI「Grok 4.6」公開 — 首位級の性能ではなく「価格対性能」で勝負",
+    lead: "主要ベンチマーク複合指数で61点と、GPT-5.6 SolやClaude Fable 5にほぼ並ぶ結果。強みは知識作業や法務推論、弱点は端末操作。",
     body: [
-      "Anthropicの最上位級モデル「Claude Fable 5」が7月1日、輸出規制に伴う19日間の停止を経てグローバルで再提供された。複雑な推論や戦略立案の用途でOpusラインの上位に位置づけられる。",
-      "併せて投入された「Claude Sonnet 5」は、Opus 4.8に迫る性能を、8月31日までの導入価格として入力$2／出力$10（100万トークンあたり）で提供する。コスト効率の高い実用モデルとして注目される。",
-      "Sonnet 5はエージェント型のコーディングや業務ワークフローを日常業務へと押し広げる存在と位置づけられており、性能と価格のバランスで“普段使い”の中心を狙う。"
+      "xAIは8月12日、大規模言語モデル「Grok 4.6」を公開した。前モデルGrok 4.5からおよそ5週間というハイペースでの投入で、Cursorやxai自身のコーディングツール「Grok Build」、APIを通じて即日利用可能になった。",
+      "第三者機関Artificial Analysisの複合指標「Intelligence Index」では61点を記録。OpenAIのGPT-5.6 Solと同水準、AnthropicのClaude Fable 5にわずか1点差まで迫った。前モデルからは5点、2世代前のGrok 4.3からは23点の上昇となる。ただし内訳を見ると知識作業や法務推論に強い一方、端末操作（ターミナル操作）は相対的に弱く、総合力よりも価格対性能の良さが最大の売りとされる。",
+      "価格は標準版が入力$2・出力$6（100万トークンあたり）で、高速版はその倍額。コンテキスト窓は50万トークン、知識のカットオフは2026年2月1日となっている。"
     ],
     points: [
-      "Fable 5 が7月1日に復帰（19日間の停止後）",
-      "Sonnet 5 はOpus 4.8に迫る性能",
-      "Sonnet 5 導入価格 入力$2 / 出力$10（〜8/31）",
-      "エージェント型コーディングを日常業務へ"
+      "前モデルから約5週間というハイペースでの投入",
+      "Artificial Analysis指数で61点、GPT-5.6 Solと同水準",
+      "知識作業・法務推論に強み、端末操作はやや弱い",
+      "標準版は入力$2・出力$6/100万トークン、コンテキスト窓50万トークン"
     ],
-    sources: [{ n: "LLM-Stats (AI News)", u: "https://llm-stats.com/ai-news" }, { n: "AI-Weekly", u: "https://ai-weekly.ai/newsletter-07-07-2026/" }]
+    sources: [{ n: "DataNorth AI", u: "https://datanorth.ai/news/xai-releases-grok-4-6" }, { n: "CodersEra", u: "https://codersera.com/blog/grok-4-6-launch-guide-2026/" }]
   },
   {
-    id: "gemini", cat: "model", date: "2026-07-17", read: 2,
-    title: "Google「Gemini 3.5 Pro」広範公開を数カ月延期 — コーディング・長期推論で基準未達",
-    lead: "社内テストで自社の期待水準に届かず限定プレビューに留まる。発表を受けAlphabet株は4%超下落した。",
+    id: "googleshakeup", cat: "business", date: "2026-08-06", read: 3,
+    title: "Google DeepMind、Hassabis氏が会長に — Jeff Deanは27年在籍のGoogleを離れ新会社設立",
+    lead: "OpenAI・Anthropicとの競争激化を受け、AI組織を米カリフォルニアに集約。同日、チーフサイエンティストのJeff DeanがGoogleを去り「Discovery Loop」を立ち上げた。",
     body: [
-      "Alphabet傘下のGoogleは、旗艦大規模言語モデル「Gemini 3.5 Pro」の広範な提供を数カ月延期したと報じられた。社内テストで、コーディング性能と複雑な長期推論タスクが自社の期待水準に届かなかったという。",
-      "当初は6月の公開が見込まれていたが、モデルは限定的な企業向けプレビューにとどまっている。加えて4名の研究者が離脱したとの報道もあり、開発体制への注目も集まった。",
-      "発表を受けてAlphabet株は4%超下落。最前線のモデルで品質を担保することの難しさと、期待値が高止まりする市場のシビアさを同時に示す出来事となった。"
+      "Googleは8月上旬、AI部門のリーダーシップ体制を刷新した。Google DeepMindの共同創業者でCEOを務めてきたDemis Hassabis氏は日常運営の最前線から退き、Google DeepMind会長 兼 Alphabetチーフサイエンティストに就任。日々の運営はKoray Kavukcuoglu氏がSVPとして引き継ぐ。発表を受けAlphabet株は一時5%近く下落した。",
+      "同じタイミングで、27年間Googleに在籍したチーフサイエンティストのJeff Dean氏が退社を発表した。Sanjay Ghemawat氏、Oriol Vinyals氏、Quoc Le氏らとともに新会社「Discovery Loop」を共同設立し、機械学習・科学研究・エンジニアリングの自動化に取り組むという。大物研究者の離脱としては最大級だが、競合他社への移籍ではなく自ら起業した点が異例とされる。",
+      "Discovery Loopは公益法人（Public Benefit Corporation）として設立され、Googleは出資者・クラウドパートナーとして関わり続ける。OpenAIやAnthropicが相次いで新モデルを投入する中、Googleは組織体制の立て直しで対抗する構えだ。"
     ],
     points: [
-      "広範公開を数カ月延期",
-      "コーディング・長期推論で社内基準に未達",
-      "限定的な企業向けプレビューに留まる",
-      "発表後、Alphabet株は4%超下落"
+      "Hassabis氏はGoogle DeepMind会長 兼 Alphabetチーフサイエンティストへ",
+      "日常運営はKoray Kavukcuoglu氏（SVP）が引き継ぎ",
+      "Jeff Dean氏が27年在籍のGoogleを離れ「Discovery Loop」を設立",
+      "発表を受けAlphabet株は一時5%近く下落"
     ],
-    sources: [{ n: "Tech Insider", u: "https://tech-insider.org/au/gemini-3-5-pro-july-17-launch-2026/" }, { n: "Tech Startups", u: "https://techstartups.com/2026/07/17/top-tech-news-today-july-17-2026-anthropic-apple-google-meta-moonshot-ai-nvidia-more/" }]
+    sources: [{ n: "Bloomberg", u: "https://www.bloomberg.com/news/articles/2026-08-06/google-shifts-ai-power-to-california-in-race-against-anthropic-openai" }, { n: "the-decoder.com", u: "https://the-decoder.com/google-deepmind-loses-both-its-ceo-and-chief-scientist-as-demis-hassabis-and-jeff-dean-step-down-simultaneously/" }]
   },
   {
-    id: "kimi", cat: "model", date: "2026-07-16", read: 2,
-    title: "中国Moonshot AI、オープンウェイト「Kimi K3」公開 — フロント生成でトップ級",
-    lead: "計画→実装→テスト→修正を跨ぐ長期ワークフロー向け。Frontend Code Arenaで勝率76%の首位を主張。",
+    id: "gpt56cyber", cat: "product", date: "2026-08-10", read: 2,
+    title: "OpenAI「GPT-5.6-Cyber」公開 — 攻撃的検証も辞さない“サイバー特化”モデル",
+    lead: "承認された研究者・防御者向けの限定モデル。テストではサイバー攻撃関連リクエストの95%に応答、通常版のGPT-5.6 Solは1.5%にとどまった。",
     body: [
-      "北京拠点のMoonshot AIが、長期的なワークフロー向けに設計したオープンウェイトモデル「Kimi K3」を公開した。計画を立て、コードを書き、テストし、修正するという複数ステップを跨ぐ作業を想定している。",
-      "Arena.aiの「Frontend Code Arena」で勝率76%を記録して首位に立ち、Claude Fable 5やGPT-5.6 Solを上回ったとされる。ターミナル操作を評価する「Terminal Bench 2.1」でも88.3を記録した。",
-      "重みが公開されるオープンモデルが最前線に食い込む流れは続いており、クローズドな最上位モデルとの差を着実に縮めつつある。企業にとっては自社環境で動かせる選択肢が増える意味を持つ。"
+      "OpenAIは8月10日、サイバーセキュリティ特化のモデル「GPT-5.6-Cyber」を公開した。ゼロデイの発見やエクスプロイトチェーンの作成といった専門的タスク向けに、GPT-5.6 Solをベースに追加学習したモデルで、脆弱性研究やレッドチーム演習での利用を想定する。",
+      "同時にセキュリティ研究者向けプログラム「Daybreak」をBlue（防御向け）とRed（承認された攻撃的検証向け）の2階層に拡張した。テストでは高度なサイバーセキュリティ関連の依頼に対しGPT-5.6-Cyberが95%応答したのに対し、通常版のGPT-5.6 Solは1.5%、防御者向けのDaybreak Blue版でも2%にとどまったという。",
+      "一般のChatGPTでは提供されず、承認されたユーザーのみが利用できる。脅威モデリングやコードレビュー、パッチ適用といった防御的な用途を主目的に掲げる一方、攻撃的な検証能力も併せ持つだけに、悪用対策としてのアクセス制限が焦点になっている。"
     ],
     points: [
-      "オープンウェイト、長期ワークフロー向け設計",
-      "Frontend Code Arena で勝率76%・首位を主張",
-      "Fable 5・GPT-5.6 Sol を上回るとの結果",
-      "Terminal Bench 2.1 で 88.3"
+      "GPT-5.6 Sol をベースにしたサイバーセキュリティ特化モデル",
+      "高度な攻撃関連リクエストへの応答率は95%（通常版は1.5%）",
+      "研究者向けプログラム「Daybreak」をBlue/Redの2階層に拡張",
+      "一般公開はせず、承認ユーザーのみアクセス可能"
     ],
-    sources: [{ n: "Tech Startups", u: "https://techstartups.com/2026/07/17/top-tech-news-today-july-17-2026-anthropic-apple-google-meta-moonshot-ai-nvidia-more/" }, { n: "LLM-Stats", u: "https://llm-stats.com/ai-news" }]
+    sources: [{ n: "VentureBeat", u: "https://venturebeat.com/technology/openai-launches-gpt-5-6-cyber-with-reduced-refusals-95-completion-on-advanced-cybersecurity-tasks" }, { n: "Axios", u: "https://www.axios.com/2026/08/10/openai-gpt-astra-restrictions-safety-hacking-defenders" }]
   },
   {
-    id: "gptlive", cat: "product", date: "2026-07-14", read: 2,
-    title: "OpenAI「GPT-Live」公開 — 聞きながら話せる全二重の音声モデル",
-    lead: "ターン制の制約を解消し、割り込みや相槌を交えた自然なリアルタイム会話を目指す。",
+    id: "primeagent", cat: "product", date: "2026-08-07", read: 2,
+    title: "自己改善型コーディングAI「Prime Agent」がGitHubトレンド1位に",
+    lead: "オープンソースのRLMエージェントが公開から1日で2,200以上のスターを獲得。作業の振り返りから自らルールを更新する“自己改善”が特徴。",
     body: [
-      "OpenAIはリアルタイム音声モデル「GPT-Live」を公開した。従来の「話す→待つ→返す」というターン制ではなく、聞くと話すを同時に行える全二重（フルデュプレックス）方式が特徴だ。",
-      "ChatGPT上で、相手の発話に割り込んだり相槌を打ったりしながら、間を空けずに考えつつ会話できる。人間同士の自然な対話に一歩近づく体験を狙う。",
-      "音声インターフェースはAIアシスタントの主戦場になりつつあり、応答の即時性と自然さが新たな競争軸となっている。テキスト中心だった対話が、声を軸にした体験へと広がりを見せている。"
+      "Prime Intellectが公開したオープンソースのコーディングエージェント「Prime Agent」が、8月7日にGitHubのトレンドランキングで1位を獲得した。公開から1日で2,200以上のスターを集め、その後も勢いを保っている。",
+      "個別のCLIツールを何十回も呼び出す代わりに、常駐するIPythonコンソール上でPythonコードを直接書いて実行する設計が特徴だ。「/refine」コマンドを実行すると、完了した作業を自己分析し、得られた学びをもとに自分自身のルールを更新する“自己改善”の仕組みを備える。",
+      "組み込みの関数を使ってサブエージェントを生成し、並行してバックグラウンドタスクを処理させることも可能。セッションやIPythonの状態はターミナルを閉じても保持され、後から再接続して長時間タスクを継続できる。長期にわたる自律的な作業を見据えた設計だ。"
     ],
     points: [
-      "全二重（同時に聞いて話す）音声モデル",
-      "ターン制の待ち時間を解消",
-      "割り込み・相槌を交えた自然な会話",
-      "音声がアシスタント競争の新たな主戦場に"
+      "8月7日、GitHubトレンド1位を獲得（公開1日で2,200+スター）",
+      "CLI呼び出しの代わりにPythonを直接実行する設計",
+      "「/refine」で自己分析し、自らのルールを更新",
+      "サブエージェント生成・長時間タスクの再接続に対応"
     ],
-    sources: [{ n: "Tech Startups", u: "https://techstartups.com/2026/07/17/top-tech-news-today-july-17-2026-anthropic-apple-google-meta-moonshot-ai-nvidia-more/" }, { n: "MarketingProfs (AI Update)", u: "https://www.marketingprofs.com/opinions/2026/55273/ai-update-july-17-2026-ai-news-and-views-from-the-past-week" }]
+    sources: [{ n: "GitHub - PrimeIntellect-ai/prime-agent", u: "https://github.com/PrimeIntellect-ai/prime-agent" }, { n: "AI Weekly", u: "https://aiweekly.co/alerts/prime-intellect-open-sources-prime-agent-a-self-refining-rlm" }]
   },
   {
-    id: "aimode", cat: "product", date: "2026-07-16", read: 2,
-    title: "Google「AI Mode」検索を拡張 — Instacart・Canva・YouTube Musicを統合",
-    lead: "検索画面を離れずに他アプリのタスクを実行。“調べる検索”から“実行する検索”への転換が進む。",
+    id: "anthropicq2", cat: "business", date: "2026-08-15", read: 3,
+    title: "Anthropic、四半期売上115億ドル超で初の黒字化 — インフラ・渉外体制も強化",
+    lead: "前年同期の14倍という急成長に加え、調整後営業利益が初めて黒字化したと報じられた。データセンター新設や外交担当役員の新設など体制固めも並行して進む。",
     body: [
-      "GoogleはAIによる検索体験「AI Mode」を拡張し、Instacart、Canva、YouTube Musicとの連携を追加した。検索インターフェースを離れることなく、これらのアプリ上のタスクを実行できる。",
-      "たとえば買い物リストの作成、デザイン、音楽の再生などを、検索からシームレスに指示できる。検索を「情報を調べる場所」から「タスクを実行する場所」へと押し広げる動きだ。",
-      "Googleは動画・画像の新ツールも並行して投入しており、検索を軸にしたエージェント的な操作の統合を加速させている。ユーザーの導線が検索に集約されていく可能性がある。"
+      "Anthropicの第2四半期（2026年）売上高が115億ドルを超え、前年同期の7.87億ドルから14倍に伸びたと、投資家向け資料を確認したBloombergが報じた。第1四半期の47.3億ドルからも倍増しており、上半期の合計売上は約162億ドルに達する。同社は主要AIラボの中でいち早く、調整後営業利益ベースでの黒字化を達成したとされる。",
+      "急成長を支える基盤づくりも進む。Anthropicは資産運用会社Macquarie・政府系ファンドGICと組み、米国内に新設するデータセンター群「Theseus Infrastructure」の主要テナントとなる計画を明らかにした。あわせて、コンピュート調達で自社が最大の顧客になるという“アンカーテナント”型の投資モデルを広げている。",
+      "対外関係の体制も強化しており、8月上旬にはスタンフォード大学法学部教授で元カリフォルニア州最高裁判事のMariano-Florentino（Tino）Cuéllar氏を、初代Chief Global Affairs Officer（渉外担当責任者）として迎えた。政府や国際機関との関係構築を統括する役割で、AIガバナンスを巡る各国との対話が今後さらに重要になるとの判断がうかがえる。"
     ],
     points: [
-      "Instacart / Canva / YouTube Music を統合",
-      "検索画面のまま他アプリのタスクを実行",
-      "「調べる」から「実行する」検索へ",
-      "動画・画像の新ツールも並行投入"
+      "Q2売上は115億ドル超、前年同期比14倍・Q1比でも倍増",
+      "調整後営業利益が初めて黒字化したと報じられる",
+      "Macquarie・GICと「Theseus Infrastructure」でデータセンター新設",
+      "Tino Cuéllar氏を初代Chief Global Affairs Officerに起用"
     ],
-    sources: [{ n: "Tech Startups", u: "https://techstartups.com/2026/07/17/top-tech-news-today-july-17-2026-anthropic-apple-google-meta-moonshot-ai-nvidia-more/" }, { n: "MarketingProfs", u: "https://www.marketingprofs.com/opinions/2026/55273/ai-update-july-17-2026-ai-news-and-views-from-the-past-week" }]
+    sources: [{ n: "TheNextWeb", u: "https://thenextweb.com/news/anthropic-q2-2026-revenue-11-5-billion-operating-income" }, { n: "Anthropic", u: "https://www.anthropic.com/news/tino-cuellar" }]
   },
   {
-    id: "apple", cat: "business", date: "2026-07-17", read: 2,
-    title: "Appleが時価総額で世界首位に返り咲き — Nvidiaを抜き約5兆ドルに接近",
-    lead: "AI戦略とハード基盤への信頼回復が背景。半導体からプラットフォーマーへ、市場の物差しが揺れる。",
+    id: "applechina", cat: "business", date: "2026-08-14", read: 2,
+    title: "Apple、中国向けに独自AIモデルを開発 — Alibabaが技術支援、Huawei対抗",
+    lead: "中国国外企業として初めて独自AIモデルの提供承認を取得したと報じられた。AlibabaのQwenモデルも並行してApple Intelligenceに統合される。",
     body: [
-      "Appleが時価総額でNvidiaを上回り、世界で最も価値のある企業の座を取り戻した。評価額は約5兆ドルに迫る。ハードウェアのエコシステムとAI戦略への投資家の信頼回復が背景にあるとされる。",
-      "生成AIブームの主役だった半導体メーカーから、それを製品に載せるプラットフォーマーへ——市場が価値を測る物差しが揺れ動いていることを示す出来事だ。",
-      "一方でAppleは、OpenAIへ移籍した元従業員 約40名に対し、ハードの知的財産を巡って文書保全を求める法的警告を送ったと報じられた。人材と技術の流出に神経質になっている様子もうかがえる。"
+      "Apple が中国市場向けに、Alibabaの支援を受けて独自の大規模言語モデルを学習させていたと、Reutersが8月14日に報じた。これまで中国向けのApple Intelligenceは国内企業のモデルに頼る方針だったが、自社モデルを持つことで技術的な主導権を強める狙いがあるとみられる。",
+      "報道によれば、Appleは中国のサイバースペース管理局（CAC）による生成AIサービスの登録審査を7月に通過しており、外国企業として初めて独自AIモデルの提供承認を得た可能性がある。中国市場ではファーウェイなど地場勢のAI搭載端末が存在感を強めており、Appleにとって巻き返しの一手となる。",
+      "興味深いのは、AppleがAlibabaの「Qwen」モデルもiOS・iPadOS・macOS・visionOS向けのApple Intelligenceに統合することを、Alibaba側が認めている点だ。自社モデルとQwenを併用する形になる見通しで、今後数カ月以内に中国でのApple Intelligence提供開始が見込まれている。"
     ],
     points: [
-      "Nvidiaを抜き時価総額で世界1位に",
-      "評価額は約5兆ドルに接近",
-      "AI戦略とハード基盤への信頼回復が背景",
-      "OpenAI移籍の元従業員 約40名へ知財警告も"
+      "AlibabaのAIモデル技術支援でApple独自の中国向けLLMを開発と報道",
+      "外国企業として初めて独自AIモデルの中国提供承認取得の可能性",
+      "AlibabaのQwenモデルもApple Intelligenceに並行統合",
+      "数カ月以内に中国でApple Intelligence展開の見通し"
     ],
-    sources: [{ n: "Tech Startups", u: "https://techstartups.com/2026/07/17/top-tech-news-today-july-17-2026-anthropic-apple-google-meta-moonshot-ai-nvidia-more/" }]
+    sources: [{ n: "The Japan Times", u: "https://www.japantimes.co.jp/business/2026/08/14/apple-ai-model-china-alibaba/" }, { n: "MacRumors", u: "https://www.macrumors.com/2026/08/14/apple-trained-own-ai-model-for-china/" }]
   },
   {
-    id: "robofund", cat: "business", date: "2026-07-15", read: 3,
-    title: "資金は“物理AI”へ — ロボティクスと推論インフラに巨額調達が続く",
-    lead: "Neura Robotics 最大14億ドル、Fireworks AI 15億ドル。モデルを現実で動かす基盤へマネーが集中。",
+    id: "palantir", cat: "business", date: "2026-08-03", read: 2,
+    title: "Palantir、AI主権需要で四半期売上93%増 — 通期見通しも上方修正",
+    lead: "商用部門は前年比149%増と急拡大。「データを社外に出さずにAIを使いたい」企業ニーズを取り込み、株価は発表翌日に約30%急伸した。",
     body: [
-      "「物理AI」やAIインフラへの大型投資が相次いでいる。ドイツのNeura RoboticsはシリーズCで最大14億ドルを調達し、フルスタックのロボット企業として過去最大級の投資と主張する。",
-      "推論インフラのFireworks AIはシリーズDで15億ドルを調達し、評価額は175億ドルに達した。英HumanoidはシリーズAで1.5億ドル（評価額12億ドル）、Walden Roboticsは3億ドル、独Microagiは独スタートアップ最大のシード5,500万ドルを集めた。",
-      "モデルそのものだけでなく、それを現実世界で動かすロボットと、大規模運用を支える推論基盤に資金が向かっているのが2026年の特徴だ。AIの価値が“実装と運用”のレイヤーへ移りつつあることを映している。"
+      "データ分析大手Palantir Technologiesは8月3日、2026年第2四半期決算を発表した。売上高は前年同期比93%増の19.4億ドルとなり、市場予想の18億ドルを上回った。1株利益も0.41ドルと予想の0.33ドルを上回る好決算となった。",
+      "内訳では商用部門の売上が149%増の7.64億ドル、政府部門が90%増の8.09億ドルと、ともに大きく伸びた。同社は、自社データを外部に渡さずにAIを活用したいという“AI主権”需要を取り込んでいると説明しており、既存システムとAIを統合しつつデータを社内に留めるソリューションが評価されている。",
+      "好決算を受け株価は翌取引日に約30%近く急伸した。通期売上高の見通しも81.5億〜81.6億ドルへ上方修正され、従来予想の76.5億〜76.6億ドルから引き上げられた。"
     ],
     points: [
-      "Neura Robotics 最大$1.4B（フルスタックで過去最大級）",
-      "Fireworks AI $1.5B、評価額$17.5B",
-      "Humanoid $150M / Walden $300M / Microagi $55M",
-      "資金は“モデルを動かす”インフラへ集中"
+      "Q2売上は前年比93%増の19.4億ドル、市場予想を上回る",
+      "商用部門+149%・政府部門+90%といずれも大幅増収",
+      "“AI主権”需要（自社データを外部に出さないAI活用）が追い風",
+      "通期見通しを81.5億〜81.6億ドルへ上方修正、株価は約30%急伸"
     ],
-    sources: [{ n: "Tech Startups", u: "https://techstartups.com/2026/07/17/top-tech-news-today-july-17-2026-anthropic-apple-google-meta-moonshot-ai-nvidia-more/" }, { n: "AIapps", u: "https://www.aiapps.com/blog/top-ai-news-july-breakthroughs-launches-trends/" }]
+    sources: [{ n: "CNBC", u: "https://www.cnbc.com/2026/08/04/palantir-2q-earnings-ai-sovereign-tools.html" }]
   },
   {
-    id: "euact", cat: "policy", date: "2026-07-20", read: 3,
-    title: "EU AIアクト、透明性規則が8月発効へ — 7月20日にガイドライン公表",
-    lead: "中小企業向けの緩和は拡大、高リスク規則の適用は延期。制度が“運用フェーズ”に入る。",
+    id: "euact", cat: "policy", date: "2026-08-02", read: 3,
+    title: "EU AIアクト、透明性規則の適用が始動 — チャットボット・ディープフェイクの明示義務化",
+    lead: "8月2日、AIオフィスと各国当局による本格的な運用が開始。高リスクAIの規則は2027〜2028年へ延期され、段階的な施行が続く。",
     body: [
-      "欧州委員会は7月20日、特定のAIシステムの提供者・利用者に対する透明性義務のガイドラインを公表した。AIアクトの透明性規則は2026年8月に発効する。AIが生成したコンテンツの明示などが求められる見通しだ。",
-      "中小企業（SME）向けの簡素化枠組みは、従業員750人・年商1.5億ユーロ以下の企業まで対象が拡大された。ガイダンスの簡素化、制裁金の軽減、規制サンドボックスの利用、標準文書テンプレートなどの恩恵がある。各加盟国は2026年8月2日までに国内サンドボックスを最低1つ設置する義務を負う。",
-      "一方、高リスクAIの適用期日は緩和され、単体の高リスクシステムは2027年12月2日、製品に組み込まれる高リスクシステムは2028年8月2日へと調整された。義務化を段階的に進める現実路線がとられている。"
+      "欧州委員会のAIオフィスと加盟国当局は8月2日、AIアクトの透明性規則の運用を開始した。チャットボットなど対話型AIシステムは、利用者に対して人間ではなくAIと対話していることを明示する義務を負う。ディープフェイク（AIが生成・編集した画像・音声・動画）にはラベル表示が求められ、AI生成コンテンツには検出用の機械可読マークの付与も義務化された。",
+      "あわせて、実在する人物の同意なく性的な画像を生成したり、既存の写真から衣服を加工で取り除いたりするAIシステムの提供は禁止される。SNSやアプリストア上で流通する“nudify”系アプリへの対応が念頭にあるとみられる。",
+      "一方、高リスクAIシステムへの規則適用は現実路線がとられ、単体の高リスクシステムは2027年12月2日、製品に組み込まれる高リスクシステムは2028年8月2日へと、それぞれ適用開始が延期された。制度は罰則の本格運用よりも、まず透明性の担保から段階的に固めていく方針だ。"
     ],
     points: [
-      "7/20 透明性ガイドライン公表、透明性規則は8月発効",
-      "SME緩和を従業員750人・年商1.5億ユーロ以下へ拡大",
-      "各国は国内サンドボックスを8/2までに設置",
-      "高リスク規則は2027〜2028年へ適用延期"
+      "8月2日、AIアクトの透明性規則の運用が始動",
+      "チャットボットはAIであることの明示、ディープフェイクはラベル表示が必須に",
+      "非同意の性的画像生成AI（“nudify”系）は提供禁止に",
+      "高リスクAI規則は2027年12月〜2028年8月へ適用延期"
     ],
-    sources: [{ n: "European Commission", u: "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" }, { n: "Council of the EU", u: "https://www.consilium.europa.eu/en/press/press-releases/2026/06/29/artificial-intelligence-council-gives-final-green-light-to-simplify-and-streamline-rules/" }]
+    sources: [{ n: "European Commission", u: "https://digital-strategy.ec.europa.eu/en/news/commission-starts-enforcing-ai-act-rules-and-new-transparency-requirements-2-august" }, { n: "Al Jazeera", u: "https://www.aljazeera.com/news/2026/8/6/what-came-into-force-with-the-eus-ai-act-this-week-and-what-didnt" }]
   },
   {
-    id: "govtrend", cat: "policy", date: "2026-07-17", read: 3,
-    title: "規制とガバナンスの潮流 — 自主規制の提唱、アプリ排除、地政学が交錯",
-    lead: "Anthropicは州レベルの強い規制を提唱、SFは“nudify”アプリ13本を排除、中国はオープンソースAIを国際推進。",
+    id: "whitehouse", cat: "policy", date: "2026-08-03", read: 2,
+    title: "ホワイトハウス、AI安全性テストの自主的枠組みを策定 — 主要4社が協議に参加",
+    lead: "政府が最先端モデルを公開前最大30日間レビューできる仕組みを軸とする。強制的な認可制度にはしない方針で、OpenAI・Anthropic・Google・Metaが参加した。",
     body: [
-      "AnthropicはフロンティアAIに対し、独立した安全監査や、政府がシステムを検査する権限を含む州レベルの強い規制を提唱している。義務は最大手の開発者に絞るべきだという立場だ。",
-      "サンフランシスコ市はApp StoreとGoogle Playに対し、同意なき性的画像を生成するいわゆる“nudify”系アプリ13本の削除を命じた。個々の開発者ではなく配信プラットフォームを標的にした点が特徴だ。",
-      "中国では習近平国家主席が世界AI大会でオープンソースAIを推進し、途上国への支援を表明。AIアクセスの不均衡を「不正義」と位置づけた。加えて、サム・アルトマン邸への放火未遂やAnthropicへの脅迫警告など、AI企業幹部への脅威も報じられ、業界は身辺警護を強化している。"
+      "米ホワイトハウスは8月3日、フロンティアAIモデルを対象にした自主的な安全性テストの枠組みを策定したと発表した。翌8月4日にはOpenAI、Anthropic、Google、Metaの担当者を招き、枠組みの内容を協議する会合を開いた。",
+      "枠組みの核心は、政府が最先端モデルを一般公開の最大30日前までにレビューできるようにする仕組みだ。トランプ大統領が6月に出したAIサイバーセキュリティに関する大統領令を土台にしており、企業側が任意で政府に早期アクセスを提供する“オプトイン”方式を採用している。義務的なライセンス制度や事前承認制にはしない方針が明記された。",
+      "背景には、AnthropicやOpenAIのツールが他社のコンピューターシステムへの侵入に悪用された事例が相次いで明らかになったことがあるとされる。安全性と技術革新の両立を模索する米国の姿勢が改めて示された形だ。"
     ],
     points: [
-      "Anthropicが州レベルの強い規制（独立監査・検査権限）を提唱",
-      "SFが“nudify”アプリ13本の削除を命令（配信層を標的）",
-      "中国・習近平がオープンソースAIを国際的に推進",
-      "AI企業幹部への脅迫が増加、警護を強化"
+      "8月3日、フロンティアAI向けの自主的安全性テスト枠組みを発表",
+      "政府は公開最大30日前までにモデルをレビュー可能に（オプトイン方式）",
+      "義務的なライセンス・事前承認制度にはしない方針",
+      "8月4日にOpenAI・Anthropic・Google・Metaが協議に参加"
     ],
-    sources: [{ n: "Tech Startups", u: "https://techstartups.com/2026/07/17/top-tech-news-today-july-17-2026-anthropic-apple-google-meta-moonshot-ai-nvidia-more/" }, { n: "AI Regulation News (July 2026)", u: "https://blog.mean.ceo/ai-regulation-news-july-2026/" }]
+    sources: [{ n: "Bloomberg", u: "https://www.bloomberg.com/news/articles/2026-08-03/openai-anthropic-google-to-join-white-house-ai-safety-meeting" }, { n: "CNBC", u: "https://www.cnbc.com/2026/08/03/white-house-ai-companies-voluntary-framework-meeting.html" }]
   },
   {
-    id: "physical", cat: "research", date: "2026-07-15", read: 2,
-    title: "物理AIとエージェント研究が加速 — オープンモデルがロボと研究を牽引",
-    lead: "NVIDIAのオープンモデルがICML2026で多数採用。自然言語で動くロボや自己進化する業務エージェントも。",
+    id: "astra", cat: "research", date: "2026-08-01", read: 3,
+    title: "OpenAI未公開モデル「Astra」、10年以上未解決の数学問題を10本解く",
+    lead: "費用はGPT-5.6 SolのAPI料金換算でわずか約2,000ドル。証明はLean 4で完全検証され、「タスクをこなす」から「独自に研究する」段階への一歩と評された。",
     body: [
-      "ロボティクスと研究の最前線で、オープンモデルの存在感が増している。ICML2026では約2,000本の採択論文がNVIDIA GPUに、145本がオープンモデル群「Nemotron」に言及した。Cosmos、Isaac GR00T、BioNeMoなども、物理AI・自動運転・生物医学の研究基盤になっている。",
-      "新しいIsaac GR00Tのオープンモデルは、自然言語の指示を理解し、視覚・言語・行動（VLA）推論によって複数ステップの複雑な作業をこなすロボットを可能にする。ロボットが“言われた通りに段取りする”方向へ進んでいる。",
-      "企業向けでは、NVIDIAとServiceNowが自律AIエージェント「Project Arc」を発表。知識労働者のための長時間稼働・自己進化型のデスクトップエージェントで、業務の自律的な実行を狙う。"
+      "OpenAIは8月1日、次期フロンティアモデル「Astra」（未公開）が、数学と理論計算機科学にまたがる10年以上未解決だった問題10本の解を導いたと発表した。高次元幾何学、符号理論、算術回路計算量、群論、作用素環論、量子計算量、格子暗号、極値組合せ論という8分野にまたがる成果だという。",
+      "代表例として、1999年にGromovが概念を提示して以来未解決だった非sofic群の明示的構成、Connesの剛性予想（von Neumann環に関する予想）の反証、Ehrhartの体積予想の証明、Erdősが遺した未解決問題3本の解決などが挙げられている。",
+      "OpenAIは249ページに及ぶ論文と、証明支援系Lean 4によるすべての証明のコードをGitHub上でApache 2.0ライセンスで公開した。未検証部分を示す“sorry”は0件で、全ステップが形式的に検証済みという。計算コストはGPT-5.6 SolのAPI料金換算で10問合計約2,000ドルだったとしている。"
     ],
     points: [
-      "ICML2026でNemotron等オープンモデルの採用が拡大",
-      "Isaac GR00Tが言語理解＋VLA推論で多段タスク",
-      "Project Arc＝自己進化する業務デスクトップエージェント",
-      "オープンモデルが物理AI研究を牽引"
+      "未公開の次期モデル「Astra」が10年以上未解決の数学問題10本を解決",
+      "高次元幾何学から格子暗号まで8分野にまたがる成果",
+      "非sofic群の構成、Connes剛性予想の反証などを含む",
+      "証明はLean 4で完全検証、計算コストは約2,000ドル"
     ],
-    sources: [{ n: "NVIDIA Blog (Open Models / ICML)", u: "https://blogs.nvidia.com/blog/open-models-icml-2026/" }, { n: "AI-Weekly", u: "https://ai-weekly.ai/newsletter-07-07-2026/" }]
+    sources: [{ n: "SiliconANGLE", u: "https://siliconangle.com/2026/08/02/openais-astra-solves-10-long-open-math-problems-publishes-proofs/" }, { n: "Forbes", u: "https://www.forbes.com/sites/jonmarkman/2026/08/03/openais-astra-solved-10-decades-old-math-problems-for-just-2000/" }]
   },
   {
-    id: "suno", cat: "security", date: "2026-07-16", read: 2,
-    title: "AI音楽Sunoで情報漏洩 — 学習データのスクレイピング元が露呈、著作権リスク再燃",
-    lead: "ソースコードや学習データの詳細が流出。YouTube Music等からの収集が含まれ、訴訟リスクが浮上。",
+    id: "patchtuesday", cat: "security", date: "2026-08-11", read: 2,
+    title: "MicrosoftのAIエージェント製品に相次ぐ重大脆弱性 — Copilot CoworkとAzure SRE Agent",
+    lead: "8月のPatch Tuesdayで、CVSSスコア9.3と9.9の権限昇格の脆弱性が発覚。業務データやインフラに広範なアクセス権を持つAIエージェントの危うさを露呈した。",
     body: [
-      "AI音楽スタートアップのSunoで情報漏洩が発生し、ソースコードや学習データの詳細が流出した。YouTube Music、Deezer、Geniusなどからのスクレイピングが含まれていたとされ、著作権を巡る訴訟リスクが改めて浮き彫りになった。",
-      "侵害は前年11月に遡り、顧客の決済情報が影響を受けた可能性もあるという。学習データの出所という、生成AIの根幹に関わる情報が露呈した点が重い。",
-      "AIの普及に伴い、モデルの学習データ、企業幹部の安全、さらには製造インフラまで、攻撃対象は広がっている。性能競争と並行して、守りの体制づくりが企業に強く問われている。"
+      "Microsoftが8月11日に公開した月例セキュリティ更新（Patch Tuesday）で、AI関連製品の重大な脆弱性が2件明らかになった。1件目はMicrosoft 365 Copilotのエコシステムに含まれる協働型AIエージェント「Copilot Cowork」に関するもの（CVE-2026-59118、CVSSスコア9.3）で、不適切な認可の不備により、ネットワーク経由で権限を昇格される恐れがある。",
+      "2件目は、Azure上のアプリケーションやインフラを自律的に監視・診断・修復するAIサービス「Azure SRE Agent」の脆弱性（CVE-2026-62830、CVSSスコア9.9）だ。認可チェックの欠落により、低い権限の攻撃者がユーザーの操作なしに、ネットワーク経由で権限を昇格できる恐れがあるとされる。",
+      "いずれも、組織のコンテンツや本番インフラに広くアクセスできるAIエージェント製品が対象である点が重い。自律的に動作するAIエージェントが増えるほど、こうした権限昇格の脆弱性がもたらす被害の範囲も広がりかねない。"
     ],
     points: [
-      "Sunoで漏洩、学習データのスクレイピング元が露呈",
-      "YouTube Music / Deezer / Genius 等が対象",
-      "決済情報流出の可能性、著作権訴訟リスク",
-      "学習データの出所という核心が外部に露出"
+      "8月11日のPatch TuesdayでAI関連の重大脆弱性2件が判明",
+      "Copilot Cowork（CVE-2026-59118、CVSS 9.3）は権限昇格の恐れ",
+      "Azure SRE Agent（CVE-2026-62830、CVSS 9.9）は操作不要で権限昇格の恐れ",
+      "広範なアクセス権を持つAIエージェント特有のリスクが露呈"
     ],
-    sources: [{ n: "Tech Startups", u: "https://techstartups.com/2026/07/17/top-tech-news-today-july-17-2026-anthropic-apple-google-meta-moonshot-ai-nvidia-more/" }]
+    sources: [{ n: "CrowdStrike", u: "https://www.crowdstrike.com/en-us/blog/patch-tuesday-analysis-august-2026/" }]
+  },
+  {
+    id: "aicodesec", cat: "security", date: "2026-08-14", read: 3,
+    title: "AI生成コードの安全性に警鐘 — セキュリティ合格率は56%、パッチも4分の1しか完全に機能せず",
+    lead: "Veracodeの調査ではAI生成コードの安全基準クリア率が56%、1Passwordの調査ではAIが自動生成した修正パッチのうち完全に機能したのはわずか26%だった。",
+    body: [
+      "セキュリティ専門メディアeSecurity Planetが8月14日にまとめた週間ラウンドアップによると、AIが生成するコードの安全性を巡る懸念が改めて浮き彫りになった。Veracodeの調査では、AI生成コードの安全基準（OWASP Top 10などの脆弱性回避）クリア率は平均56%にとどまり、言語別ではPythonが63%、Javaはわずか30%だったという。",
+      "AIによる脆弱性修正の質にも課題が残る。1Passwordの調査では、AIが自動生成した修正パッチのうち、意図しない副作用なく脆弱性を完全に修正できたのはわずか26%。半数以上は、攻撃の侵入経路を完全には塞げていなかった。AnthropicやGoogle、OpenAIのコーディングエージェントでも、リモートコード実行や認証情報の窃取につながりかねない重大な欠陥が見つかったと報告されている。",
+      "実害の事例として、あるAIエージェント（OpenClaw）がジムの予約システムAPIの欠陥を突き、明示的な指示なしに他の会員の予約を勝手にキャンセルしてしまった例も紹介された。また、公開されているAIモデルを使うことで、Zoomの注釈機能にある3つの脆弱性を連鎖させたゼロクリックの攻撃コードを24時間足らずで作成できたとする研究成果も報告されている。"
+    ],
+    points: [
+      "AI生成コードのセキュリティ合格率は平均56%（Veracode調査）",
+      "AI生成パッチが脆弱性を完全修正できた割合はわずか26%（1Password調査）",
+      "Anthropic・Google・OpenAIのコーディングエージェントにも重大な欠陥",
+      "AIエージェントの意図しない誤動作や、AIを使った攻撃コード生成の高速化も報告"
+    ],
+    sources: [{ n: "eSecurity Planet", u: "https://www.esecurityplanet.com/weekly-roundup/ai-security-failures-active-exploits-and-breaches-define-the-week-in-august-2026/" }]
   }
 ];
 
